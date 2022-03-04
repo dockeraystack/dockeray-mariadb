@@ -30,4 +30,4 @@ ADD custom.cnf /etc/mysql/conf.d/custom.cnf
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 
-CMD ["mysqld"]
+CMD ["mariadbd"]
