@@ -26,6 +26,7 @@ RUN apt-get update \
     && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
 
 ADD custom.cnf /etc/mysql/conf.d/custom.cnf
+ADD 1-add-reload-privileges.sh /docker-entrypoint-initdb.d/
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 
