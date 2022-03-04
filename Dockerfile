@@ -18,15 +18,15 @@ FROM mariadb:10.3.17
 
 ENV DOCKERIZE_VERSION v0.6.1
 
-ADD x-post-restore.sql /docker-entrypoint-initdb.d/
-ADD custom.cnf /etc/mysql/conf.d/custom.cnf
-
 RUN apt-get update \
     && apt-get install -y wget \
     && rm -rf /var/lib/apt/lists/* \
     && wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
     && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
     && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+
+ADD x-post-restore.sql /docker-entrypoint-initdb.d/
+ADD custom.cnf /etc/mysql/conf.d/custom.cnf
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
 
