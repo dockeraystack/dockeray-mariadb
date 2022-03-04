@@ -25,7 +25,6 @@ RUN apt-get update \
     && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
     && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
 
-ADD x-post-restore.sql /docker-entrypoint-initdb.d/
 ADD custom.cnf /etc/mysql/conf.d/custom.cnf
 
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
