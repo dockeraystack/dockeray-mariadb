@@ -16,14 +16,16 @@
 
 FROM mariadb:10.7.3
 
-ENV DOCKERIZE_VERSION v0.6.1
+ARG TARGETARCH
+
+COPY dockerize-linux-$TARGETARCH-v0.6.1.tar.gz /tmp/dockerize.tar.gz
 
 RUN apt-get update \
     && apt-get install -y wget \
     && rm -rf /var/lib/apt/lists/* \
-    && wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
-    && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
-    && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
+    && tar -C /usr/local/bin -xzvf /tmp/dockerize.tar.gz \
+    && rm /tmp/dockerize.tar.gz \
+    && rm -rf /tmp/* /var/cache/apk/* 
 
 ADD custom.cnf /etc/mysql/conf.d/custom.cnf
 ADD 1-pre-custom-sql.sh /docker-entrypoint-initdb.d/
