@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-FROM mariadb:10.7.3
+FROM mariadb:10.11.4
 
 ARG TARGETARCH
 
